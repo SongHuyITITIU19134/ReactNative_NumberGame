@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   numberText: {
-    color: Color.accent500,
+    color: "#FFFFFF",
     fontSize: 36,
     fontWeight: "bold",
   },

@@ -1,8 +1,11 @@
+import { AntDesign } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
+import IntructionText from "../components/IntructionText";
 import NumberContainer from "../components/NumberContainer";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
+import Color from "../constant/Color";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNumber = Math.floor(Math.random() * (max - min) + min);
@@ -48,29 +51,49 @@ function GameScreen({ userNumber, onGameOver }) {
   }, [currentGuess, userNumber, onGameOver]);
 
   return (
-    <View style={style.contain}>
+    
+    <View style={styles.contain}>
       <Title>Oppent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-
       <View>
-        <Text>Higher or Lower ?</Text>
-        <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-          -
-        </PrimaryButton>
-        <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
-          +
-        </PrimaryButton>
+        <IntructionText style={styles.instructionText}>
+          Higher or Lower ?
+        </IntructionText>
+        <View style={styles.buttonContain}>
+          <View style={styles.buttonProperties}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+              <AntDesign name="minuscircle" size={24} color="black" />
+            </PrimaryButton>
+          </View>
+          <View style={styles.buttonProperties}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+              <AntDesign name="pluscircle" size={24} color="black" />
+            </PrimaryButton>
+          </View>
+        </View>
       </View>
+
       <View>{/* <Text> LOG ROUND</Text> */}</View>
     </View>
   );
 }
 
 export default GameScreen;
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   contain: {
     padding: 24,
     flex: 1,
     color: "#FFFFFF",
+   
+  },
+  instructionText: {
+    marginBottom: 18,
+  },
+  buttonContain: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  buttonProperties: {
+    padding: 5,
   },
 });

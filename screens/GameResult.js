@@ -1,10 +1,13 @@
-import { Text } from "react-native"; 
+import { Text, View, Image } from "react-native";
 
+function GameResult() {
+  return(
 
-function GameResult(){
-    return <Text>
-        Game is Over !! 
-    </Text>
+  <View>
+    <Text>Game is Over !!</Text>
+    <Image source={require('./images/youwon.jpg')}/>
+  </View>
+  )
 }
 
 export default GameResult;

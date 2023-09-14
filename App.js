@@ -1,3 +1,5 @@
+import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
@@ -10,6 +12,13 @@ export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, setGameIsOver] = useState(true);
 
+  const [fontsLoad] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+  if (!fontsLoad) {
+    <AppLoading />;
+  }
   function gameOverHandler() {
     setGameIsOver(true);
   }

@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Alert, StyleSheet, TextInput, View } from "react-native";
-import Card from "../components/Card";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
 import Color from "../constant/Color";
 
 function GameStartScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
-
   function numberInputHandler(enteredNumber) {
     setEnteredNumber(enteredNumber);
   }
@@ -15,7 +13,6 @@ function GameStartScreen({ onPickNumber }) {
   function resetInputHandler() {
     setEnteredNumber("");
   }
-
   function confirmInputHandle() {
     const chooseNumber = parseInt(enteredNumber);
     if (isNaN(chooseNumber) || chooseNumber <= 0 || chooseNumber > 99) {
@@ -32,17 +29,18 @@ function GameStartScreen({ onPickNumber }) {
   return (
     <View style={styles.contain}>
       <Title>Guess My Number</Title>
-      <Card>
-
-      <TextInput
-        maxLength={2}
-        style={styles.numberInput}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={enteredNumber}
-        onChangeText={numberInputHandler}
+      <View style={styles.textArea}>
+        <TextInput
+          placeholder="00"
+          maxLength={2}
+          style={styles.textInput}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={enteredNumber}
+          onChangeText={numberInputHandler}
         />
+      </View>
       <View style={styles.buttonContainer}>
         <View style={styles.buttonProperties}>
           <PrimaryButton onPress={resetInputHandler}>Rest</PrimaryButton>
@@ -51,13 +49,11 @@ function GameStartScreen({ onPickNumber }) {
           <PrimaryButton onPress={confirmInputHandle}>Confirm</PrimaryButton>
         </View>
       </View>
-        </Card>
     </View>
   );
 }
 
 export default GameStartScreen;
-
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
@@ -67,7 +63,7 @@ const styles = StyleSheet.create({
   contain: {
     justifyContent: "center",
     alignItems: "center",
-    padding: 16,
+    padding: 15,
     marginTop: 36,
     backgroundColor: "#72063c",
     marginHorizontal: 24,
@@ -80,14 +76,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
   },
-  buttonProperties: {
-    flex: 1,
+  buttonProperties: {},
+  textArea: {
+    padding: 30,
   },
   textInput: {
     color: Color.accent500,
-    fontSize: 18,
+    fontSize: 40,
     fontWeight: "bold",
+    borderBottomWidth: 3,
+
+    borderBottomColor: Color.accent500,
   },
 });
